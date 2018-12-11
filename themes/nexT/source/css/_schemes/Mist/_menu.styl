@@ -1,0 +1,51 @@
+// Menu
+// --------------------------------------------------
+.site-nav-toggle {
+  position: static;
+  float: right;
+}
+
+
+.menu {
+  float: center;
+  margin: 12px 0 0 0;
+
+  +mobile() {
+    margin: 16px 0 0 0;
+    padding: 0;
+  }
+
+  br { display: none; }
+
+  .menu-item {
+    margin: 0;
+    +mobile() { display: block; }
+  }
+
+  .menu-item a {
+    padding: 0 10px;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    transition-property: background;
+
+    +mobile() {
+      text-align: left;
+    }
+
+    &:hover { background: #e1e1e1; }
+  }
+
+  a::before {
+      display: none;
+
+      +mobile() { display: block; }
+    }
+
+  +mobile() { float: none; }
+}
+
+# 个人添加的配置内容宽度！
+header{ width: 100%; }
+.container .main-inner { width: 65%; }
+.content-wrap { width: calc ( 50% - 120px); }
