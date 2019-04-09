@@ -448,97 +448,94 @@ import urllib.request,os; pf = 'Package Control.sublime-package'; ipp =   sublim
 <font color=blue><summary>点击:代码展开</summary></font>
 ```html
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>表单</title>
-</head>
-<body>
-	<h1>注册表单</h1>
-
-	<!-- 表单的数据类型众多. -->
-
-	<!-- 提交当前的内容，方式为post. -->
-	<form action="" method="post">		
-		<div>
-
-			<!-- for的功能是：实现点击用户名这几个字，鼠标开始定位到输入框. -->
-
-			<!-- label为普通的标签. -->
-			<label for="username">用户名：</label>
-			<input type="text" name="username" id="username" />
-		</div>		
-		<br>
-		<div>
-			<label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
-
-			<!-- 类型为password，则输入后，将值显示为小黑点. -->
-			<input type="password" name="password" id="password">
-		</div>
-		<br>
-		<div>
-			<label>性&nbsp;&nbsp;&nbsp;别：</label>
-			<input type="radio" name="gender" value="0" id="male"> <label for="male">男</label>
-			<input type="radio" name="gender" value="1" id="female"> <label for="female">女</label>
-		</div>
-		<br>
-		<div>
-			<label>爱&nbsp;&nbsp;&nbsp;好：</label>
-
-			<!-- 设置value值，目的是为了提交上去。 -->
-			<input type="checkbox" name="like" value="eat"> 吃饭
-			<input type="checkbox" name="like" value="sleep"> 睡觉
-			<input type="checkbox" name="like" value="play"> 打游戏
-			<input type="checkbox" name="like" value="movie"> 看电影
-
-		</div>
-
-		<br>
-
-		<div>
-			<label>照&nbsp;&nbsp;&nbsp;骗：</label>
-			<input type="file" name="">
-		</div>
-		<br>
-
-		<div>
-			<label>个人介绍：</label>
-			<textarea name="introduce"></textarea>
-		</div>
-		
-		<br>
-
-		<div>
-			<label>籍&nbsp;&nbsp;&nbsp;贯：</label>
-			<select name="site">
-				<option value="0">北京</option>
-				<option value="1">上海</option>					
-				<option value="2">河南</option>	
-				<option value="3">河北</option>	
-				<option value="4">广州</option>	
-			</select>
-
-		</div>
-		<br>
-
-		<input type="hidden" name="hid01" value="12">
-
-		<div>
-
-
-			<input type="submit" name="" value="提交">
-
-			<!-- 以下的方式不推荐使用. -->
-
-			<!-- <input type="image" src="images/goods.jpg" name=""> -->
-
-
-			<input type="reset" name="" value="重置">
-		</div>
-
-
-	</form>
-</body>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>表单</title>
+	</head>
+	<body>
+		<h1>注册表单</h1>
+	
+		<!-- 表单的数据类型众多. -->
+	
+		<!-- 提交当前的内容，方式为post. -->
+		<form action="" method="post">		
+			<div>
+	
+				<!-- for的功能是：实现点击用户名这几个字，鼠标开始定位到输入框. -->
+	
+				<!-- label为普通的标签. -->
+				<label for="username">用户名：</label>
+				<input type="text" name="username" id="username" />
+			</div>		
+			<br>
+			<div>
+				<label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
+	
+				<!-- 类型为password，则输入后，将值显示为小黑点. -->
+				<input type="password" name="password" id="password">
+			</div>
+			<br>
+			<div>
+				<label>性&nbsp;&nbsp;&nbsp;别：</label>
+				<input type="radio" name="gender" value="0" id="male"> <label for="male">男</label>
+				<input type="radio" name="gender" value="1" id="female"> <label for="female">女</label>
+			</div>
+			<br>
+			<div>
+				<label>爱&nbsp;&nbsp;&nbsp;好：</label>
+	
+				<!-- 设置value值，目的是为了提交上去。 -->
+				<input type="checkbox" name="like" value="eat"> 吃饭
+				<input type="checkbox" name="like" value="sleep"> 睡觉
+				<input type="checkbox" name="like" value="play"> 打游戏
+				<input type="checkbox" name="like" value="movie"> 看电影
+	
+			</div>
+	
+			<br>
+	
+			<div>
+				<label>照&nbsp;&nbsp;&nbsp;骗：</label>
+				<input type="file" name="">
+			</div>
+			<br>
+	
+			<div>
+				<label>个人介绍：</label>
+				<textarea name="introduce"></textarea>
+			</div>
+			
+			<br>
+	
+			<div>
+				<label>籍&nbsp;&nbsp;&nbsp;贯：</label>
+				<select name="site">
+					<option value="0">北京</option>
+					<option value="1">上海</option>					
+					<option value="2">河南</option>	
+					<option value="3">河北</option>	
+					<option value="4">广州</option>	
+				</select>
+	
+			</div>
+			<br>
+	
+			<input type="hidden" name="hid01" value="12">
+	
+			<div>
+	
+				<input type="submit" name="" value="提交">
+	
+				<!-- 以下的方式不推荐使用. -->
+	
+				<!-- <input type="image" src="images/goods.jpg" name=""> -->
+	
+	
+				<input type="reset" name="" value="重置">
+			</div>
+		</form>
+	</body>
 </html>
 ```  
 </details>
