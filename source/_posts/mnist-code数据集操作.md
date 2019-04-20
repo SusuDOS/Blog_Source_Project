@@ -83,130 +83,126 @@ tags: [神经网络传播, mnist数据回归]
 <font color=blue>生成满足y = a*x + b的数据点.</font>
 
 - 设置数据分布在直线的附近.
-
-	按照实现的速度快慢排序，<font color=green>友情提示：numpy与tensorflow数据类型不兼容，使用`tf.convert_to_tensor()`.</font>
+	按照实现的速度快慢排序，<font color=green>友情提示：numpy与tensorflow数据类型不兼容，使用`tf.convert_to_tensor()`.</font>	
+- code01	
+	```python
+	import time
+	import numpy as np
+	import matplotlib.pyplot as plt
 	
-	- code01
+	"""
+	随机生成10000个点，围绕在y=0.1x+0.3的直线周围.
+	"""
 	
-		```python
-		import time
-		import numpy as np
-		import matplotlib.pyplot as plt
-		
-		"""
-		随机生成10000个点，围绕在y=0.1x+0.3的直线周围.
-		"""
-		
-		start = time.clock()
-		num_points = 100000
-		x = np.random.normal(0.0, 0.6, num_points)
-		y = x * 0.1 + 0.3 * np.ones_like(x) + np.random.normal(0.0, 0.03, num_points)
-		vectors_set = [x, y]
-		
-		plt.scatter(x,y,c='r')
-		plt.show()
-		
-		TimeCost = (time.clock() - start)
-		print("Time used:", TimeCost)
-		Time used: 1.2579034654087218
-		```	
-	- code02	
-		```python
-		import time
-		import numpy as np
-		import matplotlib.pyplot as plt
-		
-		"""
-		随机生成100000个点，围绕在y=0.1x+0.3的直线周围.
-		"""
-		
-		start = time.clock()
-		num_points = 100000
-		vectors_set = []
-		for i in range(num_points):
-		    x1 = np.random.normal(0.0, 0.6)
-		    y1 = x1 * 0.1 + 0.3 + np.random.normal(0.0, 0.03)
-		    vectors_set.append([x1, y1])
-		
-		x_data = [v[0] for v in vectors_set]
-		y_data = [v[1] for v in vectors_set]
-		
-		plt.scatter(x_data, y_data, c='r')
-		plt.show()
-		
-		elapsed = (time.clock() - start)
-		print("Time used:", elapsed)
-		
-		Time used: 3.786280029791725
-		```
-- 拟合函数：y = f(x) = a*x + b.
-	- code01
-		```python
-		import time
-		import numpy as np
-		import matplotlib.pyplot as plt
-		import tensorflow as tf
-		
-		"""
-		随机生成10000个点，围绕在y=0.1x+0.3的直线周围.
-		"""
-		
-		start = time.clock()
-		num_points = 10000
-		
-		# 构造x数组，y数组，并且为y数组添加噪音！
-		# 构建数据方法正态分布，均值，标准差.
-		x = np.random.normal(0.0, 0.6, num_points)
-		y = x * 0.1 + 0.3 * np.ones_like(x) + np.random.normal(0.0, 0.05, num_points)
-		
-		# 数据集：2*num_points
-		vectors_set = [x, y]
-		plt.scatter(x, y, c='r')
-		plt.show()
-		
-		# 运行时间计算.
-		TimeCost = (time.clock() - start)
-		print("Time used:", TimeCost)
-		
-		# 以下通过这些点的数据，得到一个拟合直线：f(x) = ax+b.
-		
-		# 构建网络结构.
-		# 构建权重参数矩阵：1维矩阵，取值是[-1,1]之间的随机数,数据正态分布.
-		W = tf.Variable(tf.random_uniform([1], -1.0, 1.0), name='W')
-		# 生成b矩阵:一维零矩阵.
-		b = tf.Variable(tf.zeros([1]), name='b')
-		# 经过计算得出预估值y
-		Forecast_Y = W * x + b
-		
-		"""
-		以预估值y和实际值y_data之间的均方误差作为损失值(残差).
-		默认每一列的和求均值，0参数，1参数则为每一行的和求均值.
-		"""
-		loss = tf.reduce_mean(tf.square(y - Forecast_Y), 0, name='loss')
-		
-		# 采用随机梯度下优化法：优化参数
-		optimizer = tf.train.GradientDescentOptimizer(0.5)
-		
-		# 目标函数：最小化残差.
-		train = optimizer.minimize(loss, name='train')
-		
-		sess = tf.Session()
-		
-		# 初始化.
-		init = tf.global_variables_initializer()
-		sess.run(init)
-		
-		# 显示：初始化的W和b值.
-		print("W =", sess.run(W), "b =", sess.run(b), "loss =", sess.run(loss))
-		
-		# 执行10次训练：参数调整.
-		for step in range(10):
-		    sess.run(train)
-		    print("第{}训练：".format(step+1),"W =", sess.run(W), "  b =", sess.run(b), "  loss =", sess.run(loss))
-		# 日志记录.
-		writer = tf.summary.FileWriter("./tmp", sess.graph)
-		# 第10训练： W = [0.09806049]   b = [0.30066237]   loss = 0.002453375
-		```
+	start = time.clock()
+	num_points = 100000
+	x = np.random.normal(0.0, 0.6, num_points)
+	y = x * 0.1 + 0.3 * np.ones_like(x) + np.random.normal(0.0, 0.03, num_points)
+	vectors_set = [x, y]
+	
+	plt.scatter(x,y,c='r')
+	plt.show()
+	
+	TimeCost = (time.clock() - start)
+	print("Time used:", TimeCost)
+	Time used: 1.2579034654087218
+	```	
+- code02	
+	```python
+	import time
+	import numpy as np
+	import matplotlib.pyplot as plt
+	
+	"""
+	随机生成100000个点，围绕在y=0.1x+0.3的直线周围.
+	"""
+	
+	start = time.clock()
+	num_points = 100000
+	vectors_set = []
+	for i in range(num_points):
+	    x1 = np.random.normal(0.0, 0.6)
+	    y1 = x1 * 0.1 + 0.3 + np.random.normal(0.0, 0.03)
+	    vectors_set.append([x1, y1])
+	
+	x_data = [v[0] for v in vectors_set]
+	y_data = [v[1] for v in vectors_set]
+	
+	plt.scatter(x_data, y_data, c='r')
+	plt.show()
+	
+	elapsed = (time.clock() - start)
+	print("Time used:", elapsed)
+	
+	Time used: 3.786280029791725
+	```
+- 拟合函数：y = f(x) = a*x + b.	
+	```python
+	import time
+	import numpy as np
+	import matplotlib.pyplot as plt
+	import tensorflow as tf
+	
+	"""
+	随机生成10000个点，围绕在y=0.1x+0.3的直线周围.
+	"""
+	
+	start = time.clock()
+	num_points = 10000
+	
+	# 构造x数组，y数组，并且为y数组添加噪音！
+	# 构建数据方法正态分布，均值，标准差.
+	x = np.random.normal(0.0, 0.6, num_points)
+	y = x * 0.1 + 0.3 * np.ones_like(x) + np.random.normal(0.0, 0.05, num_points)
+	
+	# 数据集：2*num_points
+	vectors_set = [x, y]
+	plt.scatter(x, y, c='r')
+	plt.show()
+	
+	# 运行时间计算.
+	TimeCost = (time.clock() - start)
+	print("Time used:", TimeCost)
+	
+	# 以下通过这些点的数据，得到一个拟合直线：f(x) = ax+b.
+	
+	# 构建网络结构.
+	# 构建权重参数矩阵：1维矩阵，取值是[-1,1]之间的随机数,数据正态分布.
+	W = tf.Variable(tf.random_uniform([1], -1.0, 1.0), name='W')
+	# 生成b矩阵:一维零矩阵.
+	b = tf.Variable(tf.zeros([1]), name='b')
+	# 经过计算得出预估值y
+	Forecast_Y = W * x + b
+	
+	"""
+	以预估值y和实际值y_data之间的均方误差作为损失值(残差).
+	默认每一列的和求均值，0参数，1参数则为每一行的和求均值.
+	"""
+	loss = tf.reduce_mean(tf.square(y - Forecast_Y), 0, name='loss')
+	
+	# 采用随机梯度下优化法：优化参数
+	optimizer = tf.train.GradientDescentOptimizer(0.5)
+	
+	# 目标函数：最小化残差.
+	train = optimizer.minimize(loss, name='train')
+	
+	sess = tf.Session()
+	
+	# 初始化.
+	init = tf.global_variables_initializer()
+	sess.run(init)
+	
+	# 显示：初始化的W和b值.
+	print("W =", sess.run(W), "b =", sess.run(b), "loss =", sess.run(loss))
+	
+	# 执行10次训练：参数调整.
+	for step in range(10):
+	    sess.run(train)
+	    print("第{}训练：".format(step+1),"W =", sess.run(W), "  b =", sess.run(b), "  loss =", sess.run(loss))
+	# 日志记录.
+	writer = tf.summary.FileWriter("./tmp", sess.graph)
+	# 第10训练： W = [0.09806049]   b = [0.30066237]   loss = 0.002453375
+	```
 
 ## mnist数据集.
 
