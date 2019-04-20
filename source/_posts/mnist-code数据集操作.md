@@ -109,10 +109,8 @@ tags: [神经网络传播, mnist数据回归]
 		TimeCost = (time.clock() - start)
 		print("Time used:", TimeCost)
 		Time used: 1.2579034654087218
-		```
-	
-	- code02
-	
+		```	
+	- code02	
 		```python
 		import time
 		import numpy as np
@@ -143,7 +141,6 @@ tags: [神经网络传播, mnist数据回归]
 		```
 - 拟合函数：y = f(x) = a*x + b.
 	- code01
-
 		```python
 		import time
 		import numpy as np
